@@ -8,49 +8,26 @@
  * @format
  */
 
-import React, {useState, useEffect, useCallback} from 'react';
-import Steps from './src/components/Steps';
-import {StyleSheet, View, Text} from 'react-native';
-import RNShake from 'react-native-shake';
+import React from 'react';
+import StepsScreen from './src/containers/StepsScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Prize from './src/containers/Prize';
 
+const Stack = createNativeStackNavigator();
 const App = () => {
-  const [steps, setSteps] = useState(0);
-
-  const handleShake = useCallback(() => {
-    setSteps(steps + 1);
-  }, [steps]);
-
-  useEffect(() => {
-    console.log('hiiiiiiiiii');
-    const subscription = RNShake.addListener(() => {
-      handleShake();
-    });
-    return () => {
-      subscription.remove();
-    };
-  }, [handleShake]);
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Step Counter</Text>
-      <Steps steps={steps} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={StepsScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="Prize" component={Prize} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    height: '100%',
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 27,
-    marginTop: 10,
-    fontWeight: 'bold',
-    flex: 0.5,
-  },
-});
 
 export default App;

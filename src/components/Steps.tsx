@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
+    color: 'black',
     textAlign: 'center',
     fontSize: 22,
     marginTop: 10,
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   steps: {
+    color: 'black',
     fontSize: 25,
     fontWeight: 'bold',
   },
