@@ -13,20 +13,28 @@ import StepsScreen from './src/containers/StepsScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Prize from './src/containers/Prize';
+import store from './src/store/store';
+import {Provider} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={StepsScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen name="Prize" component={Prize} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={StepsScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Prize"
+            component={Prize}
+            options={{headerShown: false}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

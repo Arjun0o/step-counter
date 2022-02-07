@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -8,26 +8,25 @@ import {
 } from 'react-native';
 import RNShake from 'react-native-shake';
 import Steps from '../components/Steps';
+import {useSelector, useDispatch} from 'react-redux';
+import {increment} from '../store/stepSlice';
 
 type Props = {
   navigation: any;
 };
 
 const StepsScreen = ({navigation}: Props) => {
-  const [steps, setSteps] = useState(0);
-
-  const handleShake = useCallback(() => {
-    setSteps(steps + 1);
-  }, [steps]);
+  const steps = useSelector(state => state.step.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const subscription = RNShake.addListener(() => {
-      handleShake();
+      dispatch(increment());
     });
     return () => {
       subscription.remove();
     };
-  }, [handleShake]);
+  }, [dispatch]);
   return (
     <SafeAreaView>
       <View style={styles.container}>
