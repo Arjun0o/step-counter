@@ -19,9 +19,8 @@ const Steps: React.FC<Props> = ({steps}) => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={styles.container}>
-        <View>
-          <Text style={styles.title}>Your Steps</Text>
-        </View>
+        <Text style={styles.title}>Goal : 5000 Steps</Text>
+        <Text style={styles.title}>Your Steps</Text>
         <View style={styles.circle}>
           <Text style={styles.steps}>{steps}</Text>
         </View>

@@ -20,23 +20,28 @@ const StepsScreen = ({navigation}: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (steps === 5) {
+      navigation.navigate('Prize');
+    }
     const subscription = RNShake.addListener(() => {
       dispatch(increment());
     });
     return () => {
       subscription.remove();
     };
-  }, [dispatch]);
+  }, [dispatch, steps, navigation]);
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <Text style={styles.title}>Step Counter</Text>
         <Steps steps={steps} />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Prize')}>
-          <Text style={styles.buttonText}>Go to Prizes!</Text>
-        </TouchableOpacity>
+        {steps >= 5 && (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('Prize')}>
+            <Text style={styles.buttonText}>Go to Prizes!</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </SafeAreaView>
   );
