@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Weather = ({navigation}: Props) => {
-  const {error, info, status} = useSelector(state => state.weather.value);
+  const {info, status} = useSelector(state => state.weather.value);
   const dispatch = useDispatch();
 
   useEffect(() => {

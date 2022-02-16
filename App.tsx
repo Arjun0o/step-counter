@@ -17,9 +17,38 @@ import store from './src/store/store';
 import {Provider} from 'react-redux';
 import Home from './src/containers/Home';
 import Weather from './src/containers/Weather';
+import {Alert} from 'react-native';
+import {
+  setJSExceptionHandler,
+  setNativeExceptionHandler,
+} from 'react-native-exception-handler';
+import RNRestart from 'react-native-restart';
 
 const Stack = createNativeStackNavigator();
+
 const App = () => {
+  const errorHandler = (e: any, isFatal: boolean) => {
+    Alert.alert(
+      'Unexpected error occurred',
+      `
+          Error: ${isFatal ? 'Fatal:' : ''} ${e.name} ${e.message}
+  
+          We will need to restart the app.
+          `,
+      [
+        {
+          text: 'Restart',
+          onPress: () => {
+            RNRestart.Restart();
+          },
+        },
+      ],
+    );
+  };
+
+  const exceptionhandler = exceptionString => {};
+  setJSExceptionHandler(errorHandler, true);
+  setNativeExceptionHandler(exceptionhandler);
   return (
     <Provider store={store}>
       <NavigationContainer>
