@@ -30,6 +30,7 @@ const StepsScreen = ({navigation}: Props) => {
       subscription.remove();
     };
   }, [dispatch, steps, navigation]);
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -42,6 +43,11 @@ const StepsScreen = ({navigation}: Props) => {
             <Text style={styles.buttonText}>Go to Prizes!</Text>
           </TouchableOpacity>
         )}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

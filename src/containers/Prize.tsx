@@ -14,8 +14,8 @@ const Prize = ({navigation}: Props) => {
       <Card steps={steps} />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Home')}>
-        <Text style={styles.buttonText}>Go Home!</Text>
+        onPress={() => navigation.navigate('Steps')}>
+        <Text style={styles.buttonText}>Go back!</Text>
       </TouchableOpacity>
     </View>
   );
