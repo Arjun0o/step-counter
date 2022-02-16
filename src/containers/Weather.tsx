@@ -1,40 +1,21 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
-import axios from 'axios';
 import Icon from 'react-native-vector-icons/AntDesign';
-
-type WeatherProps = {
-  feels_like?: number;
-  humidity?: number;
-  temp?: number;
-  temp_max?: number;
-};
+import {useSelector, useDispatch} from 'react-redux';
+import {fetchWeatherInfo} from '../store/weatherSlice';
 
 type Props = {
   navigation: any;
 };
 
 const Weather = ({navigation}: Props) => {
-  const [weatherInfo, setWeatherInfo] = useState<WeatherProps>({});
-  const [loading, setLoading] = useState(false);
-
-  const fetchWeatherInfo = async () => {
-    try {
-      setLoading(true);
-      const {data} = await axios.get(
-        'https://api.openweathermap.org/data/2.5/weather?q=delhi&appid=fbbc5458489286efe446af162e2def9e',
-      );
-      setWeatherInfo(data?.main);
-      setLoading(false);
-    } catch (e) {
-      setLoading(false);
-      console.log(e);
-    }
-  };
+  const {error, info, status} = useSelector(state => state.weather.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchWeatherInfo();
-  }, []);
+    dispatch(fetchWeatherInfo());
+  }, [dispatch]);
+
   return (
     <View style={styles.container}>
       <View>
@@ -43,30 +24,31 @@ const Weather = ({navigation}: Props) => {
         <Icon name="cloud" style={styles.icon} size={82} color={'#ff0000'} />
       </View>
 
-      {loading ? (
-        <Icon name="loading1" size={62} color={'#ff0000'} />
-      ) : (
-        <View style={styles.weatherContainer}>
-          <Text style={styles.text}>
-            Feels Like :{' '}
-            <Text style={styles.weatherInfo}>
-              {weatherInfo?.feels_like} hPa{' '}
+      <View style={styles.weatherContainer}>
+        {status === 'loading' ? (
+          <Icon name="loading1" size={62} color={'#ff0000'} />
+        ) : (
+          <View>
+            <Text style={styles.text}>
+              Feels Like :{' '}
+              <Text style={styles.weatherInfo}>{info?.feels_like} hPa </Text>
             </Text>
-          </Text>
-          <Text style={styles.text}>
-            Humidity :{' '}
-            <Text style={styles.weatherInfo}>{weatherInfo?.humidity} % </Text>
-          </Text>
-          <Text style={styles.text}>
-            Temperature :{' '}
-            <Text style={styles.weatherInfo}>{weatherInfo?.temp} </Text>
-          </Text>
-          <Text style={styles.text}>
-            Max Temperature :{' '}
-            <Text style={styles.weatherInfo}>{weatherInfo?.temp_max} </Text>
-          </Text>
-        </View>
-      )}
+            <Text style={styles.text}>
+              Humidity :{' '}
+              <Text style={styles.weatherInfo}>{info?.humidity} % </Text>
+            </Text>
+            <Text style={styles.text}>
+              Temperature :{' '}
+              <Text style={styles.weatherInfo}>{info?.temp} </Text>
+            </Text>
+            <Text style={styles.text}>
+              Max Temperature :{' '}
+              <Text style={styles.weatherInfo}>{info?.temp_max} </Text>
+            </Text>
+          </View>
+        )}
+      </View>
+
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Home')}>
