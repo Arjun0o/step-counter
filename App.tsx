@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import StepsScreen from './src/containers/StepsScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -17,12 +17,6 @@ import store from './src/store/store';
 import {Provider} from 'react-redux';
 import Home from './src/containers/Home';
 import Weather from './src/containers/Weather';
-// import {Alert} from 'react-native';
-// import {
-//   setJSExceptionHandler,
-//   setNativeExceptionHandler,
-// } from 'react-native-exception-handler';
-// import RNRestart from 'react-native-restart';
 import {InternetProvider} from './src/context';
 import {useInternet} from './src/context';
 import {ErrorScreen} from './src/containers/Error';
@@ -39,30 +33,8 @@ export const AppWrapper = () => {
   );
 };
 
-const App = () => {
+export const App = () => {
   const {networkState} = useInternet();
-  // const errorHandler = (e: any, isFatal: boolean) => {
-  //   Alert.alert(
-  //     'Unexpected error occurred',
-  //     `
-  //         Error: ${isFatal ? 'Fatal:' : ''} ${e.name} ${e.message}
-
-  //         We will need to restart the app.
-  //         `,
-  //     [
-  //       {
-  //         text: 'Restart',
-  //         onPress: () => {
-  //           RNRestart.Restart();
-  //         },
-  //       },
-  //     ],
-  //   );
-  // };
-
-  // const exceptionhandler = exceptionString => {};
-  // setJSExceptionHandler(errorHandler, true);
-  // setNativeExceptionHandler(exceptionhandler);
 
   return (
     <NavigationContainer>

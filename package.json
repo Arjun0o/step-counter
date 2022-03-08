@@ -24,7 +24,8 @@
     "react-native-screens": "^3.10.2",
     "react-native-shake": "^5.1.1",
     "react-native-vector-icons": "^9.1.0",
-    "react-redux": "^7.2.6"
+    "react-redux": "^7.2.6",
+    "swr": "^1.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

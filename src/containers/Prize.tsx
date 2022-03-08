@@ -11,11 +11,16 @@ const Prize = ({navigation}: Props) => {
   const steps = useSelector(state => state.step.value);
   return (
     <View style={styles.container}>
-      <Card steps={steps} />
+      <View>
+        <Text style={styles.text}>Rewards</Text>
+      </View>
+      <View style={styles.cardContainer}>
+        <Card steps={steps} />
+      </View>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Steps')}>
-        <Text style={styles.buttonText}>Go back!</Text>
+        onPress={() => navigation.navigate('Home')}>
+        <Text style={styles.buttonText}>GO BACK</Text>
       </TouchableOpacity>
     </View>
   );
@@ -23,30 +28,37 @@ const Prize = ({navigation}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
     height: '100%',
     padding: 20,
-    display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
   },
+
+  cardContainer: {
+    marginTop: 70,
+  },
+
   text: {
-    fontSize: 22,
+    fontSize: 26,
     textAlign: 'center',
-    marginTop: 10,
     fontWeight: 'bold',
+    color: 'black',
   },
   button: {
-    width: '40%',
+    width: '50%',
     borderColor: 'red',
     borderWidth: 2,
-    padding: 10,
+    padding: 15,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
+    marginTop: 100,
   },
   buttonText: {
     fontSize: 18,
     color: 'black',
+    fontWeight: '500',
   },
 });
 

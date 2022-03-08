@@ -20,9 +20,6 @@ const StepsScreen = ({navigation}: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (steps === 5) {
-      navigation.navigate('Prize');
-    }
     const subscription = RNShake.addListener(() => {
       dispatch(increment());
     });
@@ -35,18 +32,13 @@ const StepsScreen = ({navigation}: Props) => {
     <SafeAreaView>
       <View style={styles.container}>
         <Text style={styles.title}>Step Counter</Text>
-        <Steps steps={steps} />
-        {steps >= 5 && (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Prize')}>
-            <Text style={styles.buttonText}>Go to Prizes!</Text>
-          </TouchableOpacity>
-        )}
+        <View style={styles.stepContainer}>
+          <Steps steps={steps} />
+        </View>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Home')}>
-          <Text style={styles.buttonText}>Home</Text>
+          <Text style={styles.buttonText}>HOME</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -57,26 +49,33 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     height: '100%',
-    justifyContent: 'space-around',
+    padding: 20,
+    justifyContent: 'flex-start',
+  },
+  stepContainer: {
+    marginTop: 70,
   },
   title: {
-    fontSize: 25,
-    color: 'black',
+    fontSize: 26,
     textAlign: 'center',
+    fontWeight: 'bold',
+    color: 'black',
   },
   button: {
-    width: '40%',
+    width: '50%',
     borderColor: 'red',
     borderWidth: 2,
-    padding: 10,
+    padding: 15,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
+    marginTop: 100,
   },
   buttonText: {
     fontSize: 18,
     color: 'black',
+    fontWeight: '500',
   },
 });
 

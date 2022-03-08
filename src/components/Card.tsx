@@ -8,8 +8,14 @@ type Props = {
 const Card = ({steps}: Props) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.text}>Yay! You have completed {steps} steps</Text>
-      <Text style={styles.text}>You have won 200 points!</Text>
+      <Text style={styles.text}>You have completed {steps} steps</Text>
+      {steps > 0 ? (
+        <Text style={styles.text}>You have won 200 points!</Text>
+      ) : (
+        <Text style={styles.text}>
+          You will have to start walking to win exciting prizes!
+        </Text>
+      )}
     </View>
   );
 };
